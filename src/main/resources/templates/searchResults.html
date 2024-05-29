@@ -1,0 +1,169 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Search Results</title>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--    <a class="navbar-brand" href="#">My Shop</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--        <ul class="navbar-nav">-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/user/home">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/user/cart">View Cart</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/logout">Logout</a>-->
+<!--            </li>-->
+<!--            <form th:action="@{/search}" method="get" class="form-inline my-2 my-lg-0">-->
+<!--                <input class="form-control mr-sm-2" type="text" placeholder="Search by name" name="name" aria-label="Search by name">-->
+<!--                <input class="form-control mr-sm-2" type="text" placeholder="Search by category" name="category" aria-label="Search by category">-->
+<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--            </form>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div class="container mt-4">-->
+<!--    <h2>Search Results</h2>-->
+<!--    <div th:if="${#lists.isEmpty(results)}">-->
+<!--        <p>No results found.</p>-->
+<!--    </div>-->
+<!--    <div th:unless="${#lists.isEmpty(results)}">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-4" th:each="product : ${results}">-->
+<!--                <div class="card mb-4">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title" th:text="${product.name}">Product Name</h5>-->
+<!--                        <img th:if="${product.image != null}" th:src="@{'/image/' + ${product.image}}" style="border-top-left-radius: 15px; border-top-right-radius: 15px;" class="img-fluid" alt="Product Image" />-->
+
+<!--                        <p class="card-text" th:text="${product.description}">Product Description</p>-->
+<!--                        <p class="card-text">Price: <span th:text="${product.price}">$10.00</span></p>-->
+<!--                        <form th:action="@{/user/add-product}" method="post">-->
+<!--                            <input type="hidden" th:value="${product.id}" name="id">-->
+<!--                            <button type="submit" class="btn btn-primary">Add to Cart</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <a href="/">Back to Search</a>-->
+<!--</div>-->
+
+<!--<footer class="bg-dark text-white py-3 mt-5">-->
+<!--    <div class="container">-->
+<!--        <p class="text-center">© 2023 My Shop. All rights reserved.</p>-->
+<!--    </div>-->
+<!--</footer>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-add-to-cart {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .btn-add-to-cart:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-back {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .footer-fixed {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-content p {
+            margin: 0;
+        }
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+        }
+        .search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .search-results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container search-container">
+    <h2>Search Results</h2>
+    <div class="search-results" th:if="${#lists.isEmpty(results)}">
+        <p>No results found.</p>
+    </div>
+    <div class="search-results" th:unless="${#lists.isEmpty(results)}">
+        <div class="row">
+            <div class="col-md-4" th:each="product : ${results}">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                        <img th:if="${product.image != null}" th:src="@{'/image/' + ${product.image}}" style="border-top-left-radius: 15px; border-top-right-radius: 15px;" class="img-fluid" alt="Product Image" />
+                        <p class="card-text" th:text="${product.description}">Product Description</p>
+                        <p class="card-text">Price: <span th:text="${product.price}">$10.00</span></p>
+                        <form th:action="@{/user/add-product}" method="post">
+                            <input type="hidden" th:value="${product.id}" name="id">
+                            <button type="submit" class="btn btn-add-to-cart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:history.back()" class="btn btn-back mt-4">Back</a>
+</div>
+
+<footer class="footer-fixed py-3">
+    <div class="container footer-content">
+        <p>© 2023 My Shop. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- For social media icons -->
+</body>
+</html>

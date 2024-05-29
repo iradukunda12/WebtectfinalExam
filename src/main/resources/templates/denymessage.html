@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Approval Confirmation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .message-container {
+            text-align: center;
+        }
+
+        .icon {
+            color: #28a745; /* Green color */
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container message-container">
+    <div class="icon">
+        <i class="fas fa-check-circle"></i> <!-- Green checkmark icon -->
+    </div>
+    <div class="message">
+        We regret to inform you that your order has been denied. Please contact customer support for more information.
+    </div>
+</div>
+</body>
+</html>

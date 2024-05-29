@@ -1,0 +1,190 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Registered Users</title>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--    <div class="container">-->
+<!--        <a class="navbar-brand" href="#">My App</a>-->
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"-->
+<!--                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--            <ul class="navbar-nav">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/admin/all}">Products</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/admin/product-new}">Add Product</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/checkout}">checkout management</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/logout">Logout</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div class="container my-5">-->
+<!--    <h1 class="text-center mb-4">Registered Users</h1>-->
+<!--    <div class="alert alert-success" role="alert" th:if="${currentUser != null}">-->
+<!--        <h4 class="alert-heading">Welcome, <span th:text="${currentUser}"></span>!</h4>-->
+<!--        <p>We're glad to have you here. You can view and manage the registered users below.</p>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div class="table-responsive">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <table class="table table-striped">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <thead>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <th>Name</th>&ndash;&gt;-->
+<!--    &lt;!&ndash;                &lt;!&ndash; Add other table headers as needed &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </thead>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <tbody>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <tr th:each="user : ${users}">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <td th:text="${user.getFirstName()}"></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                &lt;!&ndash; Add other table cells as needed &ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </tbody>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </table>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--</div>-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-bottom: 70px; /* Adjust for the fixed footer */
+        }
+        .container {
+            padding-top: 50px;
+            text-align: center;
+        }
+        .navbar-custom {
+            background-color: white; /* White background */
+            border-bottom: 2px solid #28a745; /* Green border on bottom */
+        }
+        .navbar-custom .navbar-brand {
+            color: #28a745; /* Green text for brand */
+        }
+        .navbar-custom .navbar-nav .nav-link {
+            color: #28a745; /* Green text for links */
+            border-bottom: 2px solid transparent; /* Transparent border bottom */
+        }
+        .navbar-custom .navbar-nav .nav-link:hover {
+            color: #155724; /* Dark green text on hover */
+            border-bottom-color: #28a745; /* Green border bottom on hover */
+        }
+        .icon {
+            font-size: 5rem;
+            color: #28a745; /* Green color */
+            animation: pulse 2s infinite; /* Add animation */
+        }
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #28a745; /* Green footer */
+            color: white; /* White text */
+            padding: 20px;
+            font-size: 14px; /* Smaller font size */
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .social-media-icons a {
+            color: white; /* White color for social media icons */
+            margin-left: 10px;
+        }
+        /* Animation for icon */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-shopping-bag"></i> SHEIN </a> <!-- Shopping bag icon for brand -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/all"><i class="fas fa-box"></i> Products</a> <!-- Products icon -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/product-new"><i class="fas fa-plus"></i> Add Product</a> <!-- Plus icon -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/checkout"><i class="fas fa-cash-register"></i> Checkout Management</a> <!-- Cash register icon -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a> <!-- Logout icon -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="icon-container">
+        <i class="fas fa-cogs icon"></i> <!-- Icon representing the admin dashboard -->
+    </div>
+    <div class="alert alert-success" role="alert" th:if="${currentUser != null}">
+        <h4 class="alert-heading">Welcome, <span th:text="${currentUser}"></span>!</h4>
+        <p>We're glad to have you here. You can manage the system with your admin privileges.</p>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <span>&copy; 2024 SHEIN. All rights reserved.</span> <!-- Copyright text on the left -->
+            <div class="social-media-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a> <!-- Facebook icon -->
+                <a href="#"><i class="fab fa-twitter"></i></a> <!-- Twitter icon -->
+                <a href="#"><i class="fab fa-instagram"></i></a> <!-- Instagram icon -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
